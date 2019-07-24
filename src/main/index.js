@@ -7,11 +7,15 @@ import { format as formatUrl } from 'url'
 const server = require('../server/server')
 const { ipcMain } = require('electron');
 
-ipcMain.on('start-server', () => {
-  server.start();
+ipcMain.on('start-server', (event) => {
+  event.reply('start-server-reply', server.start());
 });
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+ipcMain.on('stop-server', (event) => {
+  event.reply('stop-server-reply', server.stop());
+});
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
