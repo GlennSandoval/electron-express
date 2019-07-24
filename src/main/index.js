@@ -4,13 +4,17 @@ import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 
+const server = require('../server/server')
+
+server.start();
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
 
 function createMainWindow() {
-  const window = new BrowserWindow({webPreferences: {nodeIntegration: true}})
+  const window = new BrowserWindow({ webPreferences: { nodeIntegration: true } })
 
   if (isDevelopment) {
     window.webContents.openDevTools()
@@ -18,8 +22,7 @@ function createMainWindow() {
 
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  }
-  else {
+  } else {
     window.loadURL(formatUrl({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',
