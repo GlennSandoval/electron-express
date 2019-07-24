@@ -5,8 +5,11 @@ import * as path from 'path'
 import { format as formatUrl } from 'url'
 
 const server = require('../server/server')
+const { ipcMain } = require('electron');
 
-server.start();
+ipcMain.on('start-server', () => {
+  server.start();
+});
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
