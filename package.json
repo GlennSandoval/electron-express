@@ -1,6 +1,11 @@
 {
   "name": "electron-express",
   "version": "1.0.0",
+  "license": "(MIT OR Apache-2.0)",
+  "description": "Template/Example of how to set up an Electron app",
+  "author": {
+    "name": "Glenn Sandoval"
+  },
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
